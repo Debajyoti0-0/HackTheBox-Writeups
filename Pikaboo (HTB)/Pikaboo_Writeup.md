@@ -98,7 +98,6 @@ server-status           [Status: 200, Size: 5531, Words: 265, Lines: 110]
 Looks like we have found few directories most of then doesn't look intresting but server-status which is mostly forbidden is now giving 200 status code so let's check that out.
 #### Visiting potentially intresting endpoint
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230449.png)
-
 we have something like this if you go through the whole you can find this intresting part.
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230546.png)
 Now we know we can access admin_staging endpoint using this trick.
