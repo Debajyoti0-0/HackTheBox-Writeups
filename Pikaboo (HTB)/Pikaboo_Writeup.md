@@ -143,6 +143,7 @@ Looks like we have access to logs so if we would have tried to find this LFI man
 Anyways now we have the FTP log file so the first thing that came to my mind was FTP-log poisoing so if you don't what that is, it is basically just the injecting PHP code in the FTP log and then later make web server execute that piece of code with the help of LFI.
 If you wanna learn more about it you can refer below articles.
 https://shahjerry33.medium.com/rce-via-lfi-log-poisoning-the-death-potion-c0831cebc16d
+
 https://secnhack.in/ftp-log-poisoning-through-lfi/
 # Exploitation
 Looking at the logs we can also find the username but let's go for LFI.
