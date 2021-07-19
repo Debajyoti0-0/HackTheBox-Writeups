@@ -45,20 +45,20 @@ ftp>
 Looks like we don't have anonymous login so it is a dead end for now until we have some creds for it.
 ## Web
 ### Visiting website
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223326.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223326.png)
 Not much here there is a contact page but not much there as we cannot submit the form.
 Then we have another page called pokatdex aka pokedex(For Pokemon fans like me).
 Not necessary for the machine but had to put it in.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223538.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223538.png)
 Just checking for any pokemon in there we are redirected to the link.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223635.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223635.png)
 Here we have the link for the api but looks like it still is under construction so not much from here.
 And finally there is admin page with requires basic authentication for logging in.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223811.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718223811.png)
 Default creds and bruteforce should not work as this is hardbox so let's think something other than that.
 ### Intresting thing
 Clicking cancel on the basic authentication dialogue box gives us something intresting.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718224031.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718224031.png)
 In the image you can see that it is saying it is using apache server on port 81 so there is two intresting thing first is why port 81 instead  of standard port 80 but we will get back to that later and another is nmap says it's nginx not apache so there must some sort of traffic forwarding and reverse proxy running on the backend and now to the port 81 part as nginx is running onport 80 that is why apache is on port 81 as both should be hosted on same machine.
 ### Enumeration
 Looking for version and exploit it seems to be running latest versions of both apache and nginx but I came across this article which specified that there could be path traversal due to misconfigured alias in nginx.
@@ -97,14 +97,14 @@ server-status           [Status: 200, Size: 5531, Words: 265, Lines: 110]
 ```
 Looks like we have found few directories most of then doesn't look intresting but server-status which is mostly forbidden is now giving 200 status code so let's check that out.
 #### Visiting potentially intresting endpoint
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230449.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230449.png)
 we have something like this if you go through the whole you can find this intresting part.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230546.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230546.png)
 Now we know we can access admin_staging endpoint using this trick.
 Visting that endpoint it looks like.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230642.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230642.png)
 so let's just see the dashboad so now we finally have admin dashboard or that is what I am assuming at the moment.
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230742.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718230742.png)
 looks at the url it looks fishy as it just directly calling the php page so there could be potential LFI there.
 so let's FUZZ for that as this box doesn't have rate limiting and fuzzing is extremly fast so it would be just a couple of seconds.
 #### Fuzzing For LFI
@@ -147,7 +147,7 @@ https://secnhack.in/ftp-log-poisoning-through-lfi/
 # Exploitation
 Looking at the logs we can also find the username but let's go for LFI.
 We got the log file 
-![[https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718233144.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Pikaboo%20(HTB)/Pasted%20image%2020210718233144.png)
 Now let's try and get revshell from that.
 ```bash
 kali@kali:~/HackTheBox/Pikaboo$ ftp pikaboo.htb 
