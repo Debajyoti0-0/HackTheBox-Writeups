@@ -663,3 +663,4 @@ postgres:*:18766:0:99999:7:::
 And boom we are root so let's get all the flags.
 # If you like the writeup give rep+
 Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
+<script src="https://www.hackthebox.eu/badge/387509"></script>
