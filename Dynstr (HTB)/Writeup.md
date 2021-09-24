@@ -99,7 +99,7 @@ sudo echo "10.10.10.244  dns1.dyna.htb hostmaster.dyna.htb" >> /etc/hosts
 visiting the subdomains doesn't do you any good. it's the same website so let's move on.
 ## Web Enumeration
 visiting the website we can see the potential dns name for the host.
-![alt text][https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613094211.png]]
+![alt text] (https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613094211.png)
 At the very bottom of the page we can see there is the email to contact with the domain dyna.htb so let's add it in /etc/hosts
 ```bash
 sudo echo "10.10.10.244  dyna.htb" >> /etc/hosts 
@@ -175,9 +175,9 @@ update                  [Status: 200, Size: 8, Words: 1, Lines: 2]
 ```
 We got the subdirectory update let's check it.
 Visiting the directory we got the bad auth as output.
-!![alt text][https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101320.png]]
+![alt text] (https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101320.png)
 From earlier we have creds for beta version of the website.
-![alt text][https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101429.png]]
+![alt text] (https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101429.png)
 So let's try to auth with HTTP basic authentication.
 I wrote a simple python script for that
 ```python
@@ -695,4 +695,6 @@ bash-5.0#
 ```
 Now we are root let's get all the flags.
 
+# If you like the writeup give rep+
+Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
 
