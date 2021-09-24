@@ -177,7 +177,9 @@ update                  [Status: 200, Size: 8, Words: 1, Lines: 2]
 We got the subdirectory update let's check it.
 Visiting the directory we got the bad auth as output.
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101320.png)
+
 From earlier we have creds for beta version of the website.
+
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613101429.png)
 So let's try to auth with HTTP basic authentication.
 I wrote a simple python script for that
