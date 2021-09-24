@@ -480,9 +480,9 @@ static                  [Status: 301, Size: 313, Words: 20, Lines: 10]
 Looks like we have few intresting directories.
 let's first visit administrative.
 ### Crawling through the directories
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801114446.png)
 
 Looks like a normal login page.
-![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801114446.png)
 /dashboard redirects to the homepage and /about has nothing intresting.
 /contact has the form looks like a dead form which requests with the get request but give 404 response.
 So the only good enpoint is the /administrative
