@@ -100,6 +100,7 @@ visiting the subdomains doesn't do you any good. it's the same website so let's 
 ## Web Enumeration
 visiting the website we can see the potential dns name for the host.
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Dynstr%20(HTB)/Pasted%20image%2020210613094211.png)
+
 At the very bottom of the page we can see there is the email to contact with the domain dyna.htb so let's add it in /etc/hosts
 ```bash
 sudo echo "10.10.10.244  dyna.htb" >> /etc/hosts 
