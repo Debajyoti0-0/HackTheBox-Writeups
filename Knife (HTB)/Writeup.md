@@ -55,12 +55,12 @@ Looking for it I stumbled around this Rapid7 Post https://www.rapid7.com/db/vuln
 But there is one concerning thing about this exploit you need to have mod\_proxy\_ftp
 module running and have FTP backend which we know nothing of.
 ## Web-Visting
-![[Pasted image 20210523071829.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523071829.png)
 We can find this static page and nothing intresting in it. 
-![[Pasted image 20210523072056.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523072056.png)
 looking the source code found pen.js which looked intresting but after looking at it got nothing intresting.
 Also added knife.htb in /etc/hosts to look for sub-domain but interestingly we found the default nginx page.
-![[Pasted image 20210523072307.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523072307.png)
 This was intresting.
 But let's go back to your main page.
 Looking for vulns I found one intresting thing that php 8.1.x-dev was backdoored by some hackers.
@@ -68,7 +68,7 @@ You can find articles on it.
 https://techbeacon.com/security/php-backdoored-git-hack-its-no-joke-so-dont-be-fool
 https://www.welivesecurity.com/2021/03/30/backdoor-php-source-code-git-server-breach/
 This is intresting as server is leaking the the version of PHP.
-![[Pasted image 20210523074259.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523074259.png)
 Wappalyzer detected it.
 Looking through bunch of article finally came up to this one where it showed how to exploit this backdoored by some troll hackers.
 https://blog.csdn.net/zy15667076526/article/details/116447864
@@ -267,5 +267,8 @@ root@knife:# cat root.txt
 
 ```
 We are root now so let's get all the flags.
+
 # If you like the writeup please give rep+ ,credits and do share your feedback on this writeup.
+Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
+
 
