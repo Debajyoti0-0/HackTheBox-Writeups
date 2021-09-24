@@ -813,7 +813,7 @@ Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 b247bb93174b98bfa7ae9323716ae8f5
 ````
 
-So now we root so let's get all the flags.
+Now we are root let's get all the flags.
 
 ## If you like the writeup give rep+
 Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
