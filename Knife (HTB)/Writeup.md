@@ -56,7 +56,9 @@ But there is one concerning thing about this exploit you need to have mod\_proxy
 module running and have FTP backend which we know nothing of.
 ## Web-Visting
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523071829.png)
+
 We can find this static page and nothing intresting in it. 
+
 ![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Knife%20(HTB)/Pasted%20image%2020210523072056.png)
 looking the source code found pen.js which looked intresting but after looking at it got nothing intresting.
 Also added knife.htb in /etc/hosts to look for sub-domain but interestingly we found the default nginx page.
