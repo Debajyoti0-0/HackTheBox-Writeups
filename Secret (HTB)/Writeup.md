@@ -627,6 +627,46 @@ oot/root.txt
 <--REDACTED-->aa9c3c6efe<--REDACTED-->
 <----REDACTED---->
 ```
+#/etc/shadow:
+
+root:$6$/0f5J.S8.u.dA78h$xSyDRhh5Zf18Ha9XNVo5dvPhxnI0i7D/uD8T5FcYgN1FYMQbvkZakMgjgm3bhtS6hgKWBcD/QJqPgQR6cycFj.:18873:0:99999:7:::
+daemon:*:18659:0:99999:7:::
+bin:*:18659:0:99999:7:::
+sys:*:18659:0:99999:7:::
+sync:*:18659:0:99999:7:::
+games:*:18659:0:99999:7:::
+man:*:18659:0:99999:7:::
+lp:*:18659:0:99999:7:::
+mail:*:18659:0:99999:7:::
+news:*:18659:0:99999:7:::
+uucp:*:18659:0:99999:7:::
+proxy:*:18659:0:99999:7:::
+www-data:*:18659:0:99999:7:::
+backup:*:18659:0:99999:7:::
+list:*:18659:0:99999:7:::
+irc:*:18659:0:99999:7:::
+gnats:*:18659:0:99999:7:::
+nobody:*:18659:0:99999:7:::
+systemd-network:*:18659:0:99999:7:::
+systemd-resolve:*:18659:0:99999:7:::
+systemd-timesync:*:18659:0:99999:7:::
+messagebus:*:18659:0:99999:7:::
+syslog:*:18659:0:99999:7:::
+_apt:*:18659:0:99999:7:::
+tss:*:18659:0:99999:7:::
+uuidd:*:18659:0:99999:7:::
+tcpdump:*:18659:0:99999:7:::
+landscape:*:18659:0:99999:7:::
+pollinate:*:18659:0:99999:7:::
+usbmux:*:18852:0:99999:7:::
+sshd:*:18852:0:99999:7:::
+systemd-coredump:!!:18852::::::
+dasith:$6$RM7seX/Mzkds2S1x$.vkOBt4kRfs/6JRApNqvzZ1zM6W1FK8kNKyoBOVSuZbrdlOw.vPj2D7VC0y0sz2Eg2z5rj.GdK2ApMBFynjmR/:18873:0:99999:7:::
+lxd:!:18852::::::
+mongodb:!:18852:0:99999:7:::
+
+```
+```
 Looks like we have the root flag.
 # I Don't consider the machine as pwned until I have root shell but with this one I had tough time getting the root flag also.
 # If anyone has any idea for the root shell do share it.....
