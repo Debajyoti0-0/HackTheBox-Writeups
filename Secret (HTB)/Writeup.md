@@ -40,12 +40,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Just Visting websites on ports 80,3000 both looked same.
 Just gazing through website 2 features looks intresting.
 ### Live Demo
-![[Pasted image 20211031095429.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Secret%20(HTB)/Pasted%20image%2020211031095429.png)
 which redirets to /api endpoint
-![[Pasted image 20211031095516.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Secret%20(HTB)/Pasted%20image%2020211031095516.png)
 Nothing intresting for now so let's move on to the seond feature.
 ### Source Code
-![[Pasted image 20211031095602.png]]
+![alt text](https://github.com/Debajyoti0-0/HackTheBox-Writeups/blob/main/Secret%20(HTB)/Pasted%20image%2020211031095602.png)
 The website seeming gives out it source code on website just like any other opensource projects.
 So let's download it and inspects for something good.
 Looking at the directory listing of source code it looks like it a git repository.
@@ -631,3 +631,7 @@ Looks like we have the root flag.
 # I Don't consider the machine as pwned until I have root shell but with this one I had tough time getting the root flag also.
 # If anyone has any idea for the root shell do share it.....
 # If you like the Writeup do give rep+ especially after that root part being this tough.
+
+
+# If you like the writeup give rep+
+Profie Link: [<img src="http://www.hackthebox.eu/badge/image/387509" alt="Hack The Box"/>](https://app.hackthebox.eu/profile/387509)
