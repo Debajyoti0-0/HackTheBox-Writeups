@@ -627,6 +627,8 @@ oot/root.txt
 <--REDACTED-->aa9c3c6efe<--REDACTED-->
 <----REDACTED---->
 ```
+
+```
 #/etc/shadow:
 
 root:$6$/0f5J.S8.u.dA78h$xSyDRhh5Zf18Ha9XNVo5dvPhxnI0i7D/uD8T5FcYgN1FYMQbvkZakMgjgm3bhtS6hgKWBcD/QJqPgQR6cycFj.:18873:0:99999:7:::
